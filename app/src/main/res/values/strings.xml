@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CondominioApp</string>
+    <string name="title_activity_condominio_list">CondominioListActivity</string>
+</resources>
