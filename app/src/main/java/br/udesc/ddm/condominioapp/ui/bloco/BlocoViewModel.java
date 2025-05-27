@@ -40,11 +40,11 @@ public class BlocoViewModel extends AndroidViewModel {
 
     public void carregarBlocos() {
         if (condominioIdAtual <= 0) {
-            blocos.setValue(null);
+            blocos.postValue(null);  
             return;
         }
 
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 List<Bloco> lista = repository.listarPorCondominio(condominioIdAtual);
@@ -63,13 +63,13 @@ public class BlocoViewModel extends AndroidViewModel {
 
     public void salvarBloco(Bloco bloco) {
         if (condominioIdAtual <= 0) {
-            mensagemErro.setValue("Nenhum condomínio selecionado");
+            mensagemErro.postValue("Nenhum condomínio selecionado");  
             return;
         }
 
         bloco.setCondominioId(condominioIdAtual);
 
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 if (bloco.getId() > 0) {
@@ -86,7 +86,7 @@ public class BlocoViewModel extends AndroidViewModel {
     }
 
     public void removerBloco(Bloco bloco) {
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 repository.remover(bloco.getId());
@@ -103,7 +103,7 @@ public class BlocoViewModel extends AndroidViewModel {
     }
 
     public void buscarBlocoPorId(long id) {
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 Bloco bloco = repository.buscarPorId(id);

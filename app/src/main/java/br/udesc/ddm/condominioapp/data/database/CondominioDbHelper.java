@@ -7,10 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class CondominioDbHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "condominio.db";
+    private static final int DATABASE_VERSION = 2;
 
-    private static final int DATABASE_VERSION = 1;
-
-    // Singleton
     private static CondominioDbHelper sInstance;
     public static synchronized CondominioDbHelper getInstance(Context context) {
         if (sInstance == null) {
@@ -23,7 +21,12 @@ public class CondominioDbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + CondominioContract.CondominioEntry.TABLE_NAME + " (" +
                     CondominioContract.CondominioEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     CondominioContract.CondominioEntry.COLUMN_NOME + " TEXT NOT NULL," +
-                    CondominioContract.CondominioEntry.COLUMN_ENDERECO + " TEXT NOT NULL," +
+                    CondominioContract.CondominioEntry.COLUMN_CEP + " TEXT," +
+                    CondominioContract.CondominioEntry.COLUMN_LOGRADOURO + " TEXT," +
+                    CondominioContract.CondominioEntry.COLUMN_COMPLEMENTO + " TEXT," +
+                    CondominioContract.CondominioEntry.COLUMN_BAIRRO + " TEXT," +
+                    CondominioContract.CondominioEntry.COLUMN_LOCALIDADE + " TEXT," +
+                    CondominioContract.CondominioEntry.COLUMN_UF + " TEXT," +
                     CondominioContract.CondominioEntry.COLUMN_TAXA_MENSAL + " REAL NOT NULL," +
                     CondominioContract.CondominioEntry.COLUMN_FATOR_METRAGEM + " REAL NOT NULL," +
                     CondominioContract.CondominioEntry.COLUMN_VALOR_GARAGEM + " REAL NOT NULL)";
@@ -63,6 +66,30 @@ public class CondominioDbHelper extends SQLiteOpenHelper {
                     "REFERENCES " + CondominioContract.ApartamentoEntry.TABLE_NAME + "(" + CondominioContract.ApartamentoEntry._ID + ") " +
                     "ON DELETE SET NULL)";
 
+    private static final String SQL_ADD_CEP_COLUMNS =
+            "ALTER TABLE " + CondominioContract.CondominioEntry.TABLE_NAME + " ADD COLUMN " +
+                    CondominioContract.CondominioEntry.COLUMN_CEP + " TEXT";
+
+    private static final String SQL_ADD_LOGRADOURO_COLUMNS =
+            "ALTER TABLE " + CondominioContract.CondominioEntry.TABLE_NAME + " ADD COLUMN " +
+                    CondominioContract.CondominioEntry.COLUMN_LOGRADOURO + " TEXT";
+
+    private static final String SQL_ADD_COMPLEMENTO_COLUMNS =
+            "ALTER TABLE " + CondominioContract.CondominioEntry.TABLE_NAME + " ADD COLUMN " +
+                    CondominioContract.CondominioEntry.COLUMN_COMPLEMENTO + " TEXT";
+
+    private static final String SQL_ADD_BAIRRO_COLUMNS =
+            "ALTER TABLE " + CondominioContract.CondominioEntry.TABLE_NAME + " ADD COLUMN " +
+                    CondominioContract.CondominioEntry.COLUMN_BAIRRO + " TEXT";
+
+    private static final String SQL_ADD_LOCALIDADE_COLUMNS =
+            "ALTER TABLE " + CondominioContract.CondominioEntry.TABLE_NAME + " ADD COLUMN " +
+                    CondominioContract.CondominioEntry.COLUMN_LOCALIDADE + " TEXT";
+
+    private static final String SQL_ADD_UF_COLUMNS =
+            "ALTER TABLE " + CondominioContract.CondominioEntry.TABLE_NAME + " ADD COLUMN " +
+                    CondominioContract.CondominioEntry.COLUMN_UF + " TEXT";
+
     private static final String SQL_DELETE_CONDOMINIO_TABLE =
             "DROP TABLE IF EXISTS " + CondominioContract.CondominioEntry.TABLE_NAME;
 
@@ -79,8 +106,6 @@ public class CondominioDbHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("PRAGMA foreign_keys = ON;");
@@ -93,11 +118,22 @@ public class CondominioDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(SQL_DELETE_LOCATARIO_TABLE);
-        db.execSQL(SQL_DELETE_APARTAMENTO_TABLE);
-        db.execSQL(SQL_DELETE_BLOCO_TABLE);
-        db.execSQL(SQL_DELETE_CONDOMINIO_TABLE);
-        onCreate(db);
+        if (oldVersion < 2) {
+            try {
+                db.execSQL(SQL_ADD_CEP_COLUMNS);
+                db.execSQL(SQL_ADD_LOGRADOURO_COLUMNS);
+                db.execSQL(SQL_ADD_COMPLEMENTO_COLUMNS);
+                db.execSQL(SQL_ADD_BAIRRO_COLUMNS);
+                db.execSQL(SQL_ADD_LOCALIDADE_COLUMNS);
+                db.execSQL(SQL_ADD_UF_COLUMNS);
+            } catch (Exception e) {
+                db.execSQL(SQL_DELETE_LOCATARIO_TABLE);
+                db.execSQL(SQL_DELETE_APARTAMENTO_TABLE);
+                db.execSQL(SQL_DELETE_BLOCO_TABLE);
+                db.execSQL(SQL_DELETE_CONDOMINIO_TABLE);
+                onCreate(db);
+            }
+        }
     }
 
     @Override

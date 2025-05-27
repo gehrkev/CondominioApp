@@ -94,7 +94,6 @@ public class Apartamento implements Parcelable {
                         getVagasDeGaragem() * condominio.getValorVagaGaragem()));
     }
 
-    // Implementação de Parcelable para passar objetos entre Activities
     protected Apartamento(Parcel in) {
         id = in.readLong();
         blocoId = in.readLong();

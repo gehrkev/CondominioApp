@@ -68,7 +68,6 @@ public class Bloco implements Parcelable {
         this.vagasDeGaragem = vagasDeGaragem;
     }
 
-    // Implementação de Parcelable para passar objetos entre Activities
     protected Bloco(Parcel in) {
         id = in.readLong();
         condominioId = in.readLong();

@@ -91,7 +91,6 @@ public class Locatario implements Parcelable {
         return apartamentoId > 0;
     }
 
-    // Implementação de Parcelable para passar objetos entre Activities
     protected Locatario(Parcel in) {
         id = in.readLong();
         nome = in.readString();

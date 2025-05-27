@@ -32,7 +32,7 @@ public class LocatarioViewModel extends AndroidViewModel {
     }
 
     public void carregarLocatarios() {
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 List<Locatario> lista = repository.listarTodos();
@@ -46,7 +46,7 @@ public class LocatarioViewModel extends AndroidViewModel {
     }
 
     public void carregarLocatariosSemApartamento() {
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 List<Locatario> lista = repository.listarSemApartamento();
@@ -60,7 +60,7 @@ public class LocatarioViewModel extends AndroidViewModel {
     }
 
     public void salvarLocatario(Locatario locatario) {
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 if (locatario.getId() > 0) {
@@ -77,7 +77,7 @@ public class LocatarioViewModel extends AndroidViewModel {
     }
 
     public void removerLocatario(Locatario locatario) {
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 repository.remover(locatario.getId());
@@ -94,7 +94,7 @@ public class LocatarioViewModel extends AndroidViewModel {
     }
 
     public void buscarLocatarioPorId(long id) {
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 Locatario locatario = repository.buscarPorId(id);
@@ -108,7 +108,7 @@ public class LocatarioViewModel extends AndroidViewModel {
     }
 
     public void associarApartamento(Locatario locatario, long apartamentoId) {
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 repository.associarApartamento(locatario.getId(), apartamentoId);
@@ -124,7 +124,7 @@ public class LocatarioViewModel extends AndroidViewModel {
     }
 
     public void desassociarApartamento(Locatario locatario) {
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 repository.desassociarApartamento(locatario.getId());

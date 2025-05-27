@@ -24,7 +24,12 @@ public class CondominioRepository {
 
         ContentValues values = new ContentValues();
         values.put(CondominioContract.CondominioEntry.COLUMN_NOME, condominio.getNome());
-        values.put(CondominioContract.CondominioEntry.COLUMN_ENDERECO, condominio.getEndereco());
+        values.put(CondominioContract.CondominioEntry.COLUMN_CEP, condominio.getCep());
+        values.put(CondominioContract.CondominioEntry.COLUMN_LOGRADOURO, condominio.getLogradouro());
+        values.put(CondominioContract.CondominioEntry.COLUMN_COMPLEMENTO, condominio.getComplemento());
+        values.put(CondominioContract.CondominioEntry.COLUMN_BAIRRO, condominio.getBairro());
+        values.put(CondominioContract.CondominioEntry.COLUMN_LOCALIDADE, condominio.getLocalidade());
+        values.put(CondominioContract.CondominioEntry.COLUMN_UF, condominio.getUf());
         values.put(CondominioContract.CondominioEntry.COLUMN_TAXA_MENSAL, condominio.getTaxaMensalCondominio());
         values.put(CondominioContract.CondominioEntry.COLUMN_FATOR_METRAGEM, condominio.getFatorMultiplicadorDeMetragem());
         values.put(CondominioContract.CondominioEntry.COLUMN_VALOR_GARAGEM, condominio.getValorVagaGaragem());
@@ -43,7 +48,12 @@ public class CondominioRepository {
 
         ContentValues values = new ContentValues();
         values.put(CondominioContract.CondominioEntry.COLUMN_NOME, condominio.getNome());
-        values.put(CondominioContract.CondominioEntry.COLUMN_ENDERECO, condominio.getEndereco());
+        values.put(CondominioContract.CondominioEntry.COLUMN_CEP, condominio.getCep());
+        values.put(CondominioContract.CondominioEntry.COLUMN_LOGRADOURO, condominio.getLogradouro());
+        values.put(CondominioContract.CondominioEntry.COLUMN_COMPLEMENTO, condominio.getComplemento());
+        values.put(CondominioContract.CondominioEntry.COLUMN_BAIRRO, condominio.getBairro());
+        values.put(CondominioContract.CondominioEntry.COLUMN_LOCALIDADE, condominio.getLocalidade());
+        values.put(CondominioContract.CondominioEntry.COLUMN_UF, condominio.getUf());
         values.put(CondominioContract.CondominioEntry.COLUMN_TAXA_MENSAL, condominio.getTaxaMensalCondominio());
         values.put(CondominioContract.CondominioEntry.COLUMN_FATOR_METRAGEM, condominio.getFatorMultiplicadorDeMetragem());
         values.put(CondominioContract.CondominioEntry.COLUMN_VALOR_GARAGEM, condominio.getValorVagaGaragem());
@@ -76,7 +86,12 @@ public class CondominioRepository {
         String[] projection = {
                 CondominioContract.CondominioEntry._ID,
                 CondominioContract.CondominioEntry.COLUMN_NOME,
-                CondominioContract.CondominioEntry.COLUMN_ENDERECO,
+                CondominioContract.CondominioEntry.COLUMN_CEP,
+                CondominioContract.CondominioEntry.COLUMN_LOGRADOURO,
+                CondominioContract.CondominioEntry.COLUMN_COMPLEMENTO,
+                CondominioContract.CondominioEntry.COLUMN_BAIRRO,
+                CondominioContract.CondominioEntry.COLUMN_LOCALIDADE,
+                CondominioContract.CondominioEntry.COLUMN_UF,
                 CondominioContract.CondominioEntry.COLUMN_TAXA_MENSAL,
                 CondominioContract.CondominioEntry.COLUMN_FATOR_METRAGEM,
                 CondominioContract.CondominioEntry.COLUMN_VALOR_GARAGEM
@@ -111,7 +126,12 @@ public class CondominioRepository {
         String[] projection = {
                 CondominioContract.CondominioEntry._ID,
                 CondominioContract.CondominioEntry.COLUMN_NOME,
-                CondominioContract.CondominioEntry.COLUMN_ENDERECO,
+                CondominioContract.CondominioEntry.COLUMN_CEP,
+                CondominioContract.CondominioEntry.COLUMN_LOGRADOURO,
+                CondominioContract.CondominioEntry.COLUMN_COMPLEMENTO,
+                CondominioContract.CondominioEntry.COLUMN_BAIRRO,
+                CondominioContract.CondominioEntry.COLUMN_LOCALIDADE,
+                CondominioContract.CondominioEntry.COLUMN_UF,
                 CondominioContract.CondominioEntry.COLUMN_TAXA_MENSAL,
                 CondominioContract.CondominioEntry.COLUMN_FATOR_METRAGEM,
                 CondominioContract.CondominioEntry.COLUMN_VALOR_GARAGEM
@@ -149,11 +169,25 @@ public class CondominioRepository {
     private Condominio cursorToCondominio(Cursor cursor) {
         long id = cursor.getLong(cursor.getColumnIndexOrThrow(CondominioContract.CondominioEntry._ID));
         String nome = cursor.getString(cursor.getColumnIndexOrThrow(CondominioContract.CondominioEntry.COLUMN_NOME));
-        String endereco = cursor.getString(cursor.getColumnIndexOrThrow(CondominioContract.CondominioEntry.COLUMN_ENDERECO));
+
+        String cep = cursor.getString(cursor.getColumnIndexOrThrow(CondominioContract.CondominioEntry.COLUMN_CEP));
+        String logradouro = cursor.getString(cursor.getColumnIndexOrThrow(CondominioContract.CondominioEntry.COLUMN_LOGRADOURO));
+        String complemento = cursor.getString(cursor.getColumnIndexOrThrow(CondominioContract.CondominioEntry.COLUMN_COMPLEMENTO));
+        String bairro = cursor.getString(cursor.getColumnIndexOrThrow(CondominioContract.CondominioEntry.COLUMN_BAIRRO));
+        String localidade = cursor.getString(cursor.getColumnIndexOrThrow(CondominioContract.CondominioEntry.COLUMN_LOCALIDADE));
+        String uf = cursor.getString(cursor.getColumnIndexOrThrow(CondominioContract.CondominioEntry.COLUMN_UF));
+
         double taxaMensal = cursor.getDouble(cursor.getColumnIndexOrThrow(CondominioContract.CondominioEntry.COLUMN_TAXA_MENSAL));
         double fatorMetragem = cursor.getDouble(cursor.getColumnIndexOrThrow(CondominioContract.CondominioEntry.COLUMN_FATOR_METRAGEM));
         double valorGaragem = cursor.getDouble(cursor.getColumnIndexOrThrow(CondominioContract.CondominioEntry.COLUMN_VALOR_GARAGEM));
 
-        return new Condominio(id, nome, endereco, taxaMensal, fatorMetragem, valorGaragem);
+        return new Condominio(id, nome,
+                cep != null ? cep : "",
+                logradouro != null ? logradouro : "",
+                complemento != null ? complemento : "",
+                bairro != null ? bairro : "",
+                localidade != null ? localidade : "",
+                uf != null ? uf : "",
+                taxaMensal, fatorMetragem, valorGaragem);
     }
 }

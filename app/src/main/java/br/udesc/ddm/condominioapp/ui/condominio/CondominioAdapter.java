@@ -84,7 +84,15 @@ public class CondominioAdapter extends RecyclerView.Adapter<CondominioAdapter.Co
 
         public void bind(final Condominio condominio) {
             tvNome.setText(condominio.getNome());
-            tvEndereco.setText(condominio.getEndereco());
+
+            String enderecoCompleto = condominio.getEnderecoCompleto();
+            if (enderecoCompleto != null && !enderecoCompleto.trim().isEmpty()) {
+                tvEndereco.setText(enderecoCompleto);
+                tvEndereco.setVisibility(View.VISIBLE);
+            } else {
+                tvEndereco.setText("Endereço não informado");
+                tvEndereco.setVisibility(View.VISIBLE);
+            }
 
             String taxaMensal = NumberFormatter.formatCurrency(condominio.getTaxaMensalCondominio());
             String valorMetro = NumberFormatter.formatCurrency(condominio.getFatorMultiplicadorDeMetragem());

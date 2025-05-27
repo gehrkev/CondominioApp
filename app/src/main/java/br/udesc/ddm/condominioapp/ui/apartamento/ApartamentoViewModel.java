@@ -64,11 +64,11 @@ public class ApartamentoViewModel extends AndroidViewModel {
 
     public void carregarApartamentos() {
         if (blocoIdAtual <= 0) {
-            apartamentos.setValue(null);
+            apartamentos.postValue(null);  
             return;
         }
 
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 List<Apartamento> lista = repository.listarPorBloco(blocoIdAtual);
@@ -98,7 +98,7 @@ public class ApartamentoViewModel extends AndroidViewModel {
 
     public void salvarApartamento(Apartamento apartamento) {
         if (blocoIdAtual <= 0) {
-            mensagemErro.setValue("Nenhum bloco selecionado");
+            mensagemErro.postValue("Nenhum bloco selecionado");  
             return;
         }
 
@@ -110,7 +110,7 @@ public class ApartamentoViewModel extends AndroidViewModel {
             apartamento.setValorAluguel(valorAluguel);
         }
 
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 if (apartamento.getId() > 0) {
@@ -127,7 +127,7 @@ public class ApartamentoViewModel extends AndroidViewModel {
     }
 
     public void associarLocatario(Apartamento apartamento, Locatario locatario) {
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 locatario.setApartamentoId(apartamento.getId());
@@ -152,7 +152,7 @@ public class ApartamentoViewModel extends AndroidViewModel {
             return;
         }
 
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 locatarioRepository.desassociarApartamento(apartamento.getLocatario().getId());
@@ -172,7 +172,7 @@ public class ApartamentoViewModel extends AndroidViewModel {
     }
 
     public void removerApartamento(Apartamento apartamento) {
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 repository.remover(apartamento.getId());
@@ -190,7 +190,7 @@ public class ApartamentoViewModel extends AndroidViewModel {
     }
 
     public void buscarApartamentoPorId(long id) {
-        isLoading.setValue(true);
+        isLoading.postValue(true);  
         executorService.execute(() -> {
             try {
                 Apartamento apartamento = repository.buscarPorId(id);

@@ -7,6 +7,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import br.udesc.ddm.condominioapp.data.api.RetrofitClient;
+import br.udesc.ddm.condominioapp.data.model.CepResponse;
 import br.udesc.ddm.condominioapp.data.model.Condominio;
 import br.udesc.ddm.condominioapp.data.repository.CondominioRepository;
 
@@ -14,12 +16,18 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CondominioViewModel extends AndroidViewModel {
     private final CondominioRepository repository;
     private final ExecutorService executorService;
 
     private final MutableLiveData<List<Condominio>> condominios = new MutableLiveData<>();
     private final MutableLiveData<Condominio> condominioSelecionado = new MutableLiveData<>();
+    private final MutableLiveData<CepResponse> cepConsultado = new MutableLiveData<>();
+    private final MutableLiveData<String> cepErro = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
     private final MutableLiveData<String> mensagemErro = new MutableLiveData<>();
 
@@ -32,7 +40,7 @@ public class CondominioViewModel extends AndroidViewModel {
     }
 
     public void carregarCondominios() {
-        isLoading.setValue(true);
+        isLoading.postValue(true);
         executorService.execute(() -> {
             try {
                 List<Condominio> lista = repository.listarTodos();
@@ -41,6 +49,34 @@ public class CondominioViewModel extends AndroidViewModel {
             } catch (Exception e) {
                 mensagemErro.postValue("Erro ao carregar condomínios: " + e.getMessage());
                 isLoading.postValue(false);
+            }
+        });
+    }
+
+    public void consultarCep(String cep) {
+        cepErro.setValue(null);
+        cepConsultado.setValue(null);
+
+        Call<CepResponse> call = RetrofitClient.getCepApiService().consultarCep(cep);
+        call.enqueue(new Callback<CepResponse>() {
+            @Override
+            public void onResponse(Call<CepResponse> call, Response<CepResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    CepResponse cepResponse = response.body();
+
+                    if (cepResponse.isErro()) {
+                        cepErro.postValue("CEP não encontrado");
+                    } else {
+                        cepConsultado.postValue(cepResponse);
+                    }
+                } else {
+                    cepErro.postValue("Erro ao consultar CEP");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CepResponse> call, Throwable t) {
+                cepErro.postValue("Erro de conexão. Verifique sua internet.");
             }
         });
     }
@@ -103,6 +139,14 @@ public class CondominioViewModel extends AndroidViewModel {
 
     public LiveData<Condominio> getCondominioSelecionado() {
         return condominioSelecionado;
+    }
+
+    public LiveData<CepResponse> getCepConsultado() {
+        return cepConsultado;
+    }
+
+    public LiveData<String> getCepErro() {
+        return cepErro;
     }
 
     public LiveData<Boolean> getIsLoading() {

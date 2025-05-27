@@ -9,7 +9,12 @@ public final class CondominioContract {
     public static class CondominioEntry implements BaseColumns {
         public static final String TABLE_NAME = "condominio";
         public static final String COLUMN_NOME = "nome";
-        public static final String COLUMN_ENDERECO = "endereco";
+        public static final String COLUMN_CEP = "cep";
+        public static final String COLUMN_LOGRADOURO = "logradouro";
+        public static final String COLUMN_COMPLEMENTO = "complemento";
+        public static final String COLUMN_BAIRRO = "bairro";
+        public static final String COLUMN_LOCALIDADE = "localidade";
+        public static final String COLUMN_UF = "uf";
         public static final String COLUMN_TAXA_MENSAL = "taxa_mensal_condominio";
         public static final String COLUMN_FATOR_METRAGEM = "fator_multiplicador_metragem";
         public static final String COLUMN_VALOR_GARAGEM = "valor_vaga_garagem";
