@@ -1,6 +1,8 @@
-package br.udesc.ddm.condominioapp.data.model;
+package br.udesc.ddm.condominioapp.data.api;
 
 import com.google.gson.annotations.SerializedName;
+
+import br.udesc.ddm.condominioapp.data.model.Condominio;
 
 public class CepResponse {
     @SerializedName("cep")

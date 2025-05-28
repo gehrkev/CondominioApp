@@ -1,11 +1,12 @@
 package br.udesc.ddm.condominioapp.ui.condominio;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -70,6 +71,7 @@ public class CondominioAdapter extends RecyclerView.Adapter<CondominioAdapter.Co
         private final TextView tvValores;
         private final Button btnVerBlocos;
         private final Button btnEditar;
+        private final ImageButton btnVerLocalizacao;
         private final ImageView ivMenu;
 
         public CondominioViewHolder(@NonNull View itemView) {
@@ -79,6 +81,7 @@ public class CondominioAdapter extends RecyclerView.Adapter<CondominioAdapter.Co
             tvValores = itemView.findViewById(R.id.tvValores);
             btnVerBlocos = itemView.findViewById(R.id.btnVerBlocos);
             btnEditar = itemView.findViewById(R.id.btnEditar);
+            btnVerLocalizacao = itemView.findViewById(R.id.btnVerLocalizacao);
             ivMenu = itemView.findViewById(R.id.ivMenu);
         }
 
@@ -113,25 +116,29 @@ public class CondominioAdapter extends RecyclerView.Adapter<CondominioAdapter.Co
                 }
             });
 
+            btnVerLocalizacao.setOnClickListener(v -> {
+                Intent intent = new Intent(context, MapaCondominioActivity.class);
+                intent.putExtra("endereco", condominio.getEnderecoCompleto());
+                intent.putExtra("nome", condominio.getNome());
+                context.startActivity(intent);
+            });
+
             ivMenu.setOnClickListener(v -> {
                 PopupMenu popup = new PopupMenu(context, ivMenu);
                 popup.inflate(R.menu.menu_condominio_item);
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        if (item.getItemId() == R.id.action_edit) {
-                            if (listener != null) {
-                                listener.onEditClick(condominio);
-                            }
-                            return true;
-                        } else if (item.getItemId() == R.id.action_delete) {
-                            if (listener != null) {
-                                listener.onDeleteClick(condominio);
-                            }
-                            return true;
+                popup.setOnMenuItemClickListener(item -> {
+                    if (item.getItemId() == R.id.action_edit) {
+                        if (listener != null) {
+                            listener.onEditClick(condominio);
                         }
-                        return false;
+                        return true;
+                    } else if (item.getItemId() == R.id.action_delete) {
+                        if (listener != null) {
+                            listener.onDeleteClick(condominio);
+                        }
+                        return true;
                     }
+                    return false;
                 });
                 popup.show();
             });

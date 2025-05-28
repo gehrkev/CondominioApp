@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import br.udesc.ddm.condominioapp.data.api.RetrofitClient;
-import br.udesc.ddm.condominioapp.data.model.CepResponse;
+import br.udesc.ddm.condominioapp.data.api.CepResponse;
 import br.udesc.ddm.condominioapp.data.model.Condominio;
 import br.udesc.ddm.condominioapp.data.repository.CondominioRepository;
 

@@ -44,6 +44,9 @@
             android:label="@string/title_activity_condominio_list"
             android:theme="@style/Theme.CondominioApp" />
         <activity
+            android:name=".ui.condominio.MapaCondominioActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -52,6 +55,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--    TODO Alterar Chave API-->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="SUA_CHAVE_API_AQUI" />
     </application>
 
 </manifest>

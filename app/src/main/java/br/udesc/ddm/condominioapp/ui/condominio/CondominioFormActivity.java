@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.udesc.ddm.condominioapp.R;
+import br.udesc.ddm.condominioapp.data.api.CepResponse;
 import br.udesc.ddm.condominioapp.data.model.Condominio;
 import br.udesc.ddm.condominioapp.utils.CepUtils;
 import br.udesc.ddm.condominioapp.utils.NumberFormatter;
@@ -195,7 +196,7 @@ public class CondominioFormActivity extends AppCompatActivity {
         viewModel.consultarCep(cep);
     }
 
-    private void preencherEnderecoComCep(br.udesc.ddm.condominioapp.data.model.CepResponse cepResponse) {
+    private void preencherEnderecoComCep(CepResponse cepResponse) {
         if (cepResponse.getLogradouro() != null && !cepResponse.getLogradouro().trim().isEmpty()) {
             etLogradouro.setText(cepResponse.getLogradouro());
         }

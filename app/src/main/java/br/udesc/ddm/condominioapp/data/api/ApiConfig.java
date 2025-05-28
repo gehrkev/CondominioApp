@@ -3,6 +3,8 @@ package br.udesc.ddm.condominioapp.data.api;
 public class ApiConfig {
 
     public static final String VIA_CEP_BASE_URL = "https://viacep.com.br/";
+    public static final String GOOGLE_MAPS_BASE_URL = "https://maps.googleapis.com/";
+    public static final String GOOGLE_MAPS_API = "CHAVE_API_AQUI";
 
     public static final int DEFAULT_CONNECT_TIMEOUT = 30;
     public static final int DEFAULT_READ_TIMEOUT = 30;

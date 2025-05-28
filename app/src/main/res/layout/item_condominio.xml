@@ -82,5 +82,21 @@
             app:layout_constraintStart_toEndOf="@+id/btnVerBlocos"
             app:layout_constraintTop_toBottomOf="@+id/tvValores" />
 
+        <ImageButton
+            android:id="@+id/btnVerLocalizacao"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Ver localização"
+            android:scaleType="centerInside"
+            android:src="@android:drawable/ic_dialog_map"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.168"
+            app:layout_constraintStart_toEndOf="@+id/btnEditar"
+            app:layout_constraintTop_toBottomOf="@+id/tvValores"
+            app:tint="#000000" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
