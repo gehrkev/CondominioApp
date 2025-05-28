@@ -14,10 +14,11 @@ public class NumberFormatter {
 
     public static double parseDouble(String value) {
         try {
-            // Remove os símbolos de moeda e troca vírgula por ponto
-            String cleanValue = value
-                    .replaceAll("[^0-9,]", "")  // Remove tudo que não for número ou vírgula
-                    .replace(",", ".");          // Troca vírgula por ponto
+            // Remove tudo que não for número, vírgula ou ponto
+            String cleanValue = value.replaceAll("[^0-9.,]", "");
+
+            // Troca a vírgula por ponto para o decimal
+            cleanValue = cleanValue.replace(",", ".");
 
             return Double.parseDouble(cleanValue);
         } catch (Exception e) {
