@@ -4,21 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/waveBackground"
+        android:layout_width="match_parent"
+        android:scaleX="2.0"
+        android:layout_height="160dp"
+        android:layout_alignParentBottom="true"
+        android:alpha="0.4"
+        android:scaleType="centerCrop"
+        android:src="@drawable/wave_ciano"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/waveTop"
+        android:layout_width="match_parent"
+        android:scaleX="2.0"
+        android:layout_height="160dp"
+        android:alpha="0.4"
+        android:rotation="180"
+        android:scaleType="centerCrop"
+        android:src="@drawable/wave_ciano"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnGerenciarLocatarios"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/primary"
+        android:padding="16dp"
+        android:text="Gerenciar Locatários"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnListarCondominios" />
+
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="424dp"
+        android:layout_height="260dp"
+        android:layout_marginTop="68dp"
+        android:contentDescription="@string/app_logo"
+        android:src="@drawable/logo_condominio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTitulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="284dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
-        android:text="Gerenciador de Condomínios"
+        android:text="MyMoradia"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primary"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,12 +83,13 @@
         android:id="@+id/btnCadastrarCondominio"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:background="@drawable/button_background"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/primary"
         android:padding="16dp"
         android:text="Cadastrar Condomínio"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitulo" />
 
@@ -39,27 +97,15 @@
         android:id="@+id/btnListarCondominios"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_background"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/primary"
         android:padding="16dp"
         android:text="Listar Condomínios"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnCadastrarCondominio" />
-
-    <Button
-        android:id="@+id/btnGerenciarLocatarios"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_background"
-        android:padding="16dp"
-        android:text="Gerenciar Locatários"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnListarCondominios" />
 
     <TextView
         android:id="@+id/tvVersao"
@@ -67,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Versão 1.0"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@color/textSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
