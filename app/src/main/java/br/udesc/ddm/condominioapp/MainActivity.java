@@ -2,10 +2,14 @@ package br.udesc.ddm.condominioapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ImageView;
 
 import br.udesc.ddm.condominioapp.ui.condominio.CondominioFormActivity;
 import br.udesc.ddm.condominioapp.ui.condominio.CondominioListActivity;
@@ -25,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         initComponents();
 
         setupListeners();
+
+        animateWaves();
     }
 
     private void initComponents() {
@@ -57,5 +63,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void animateWaves() {
+        ImageView waveBottom = findViewById(R.id.waveBackground);
+        ImageView waveTop = findViewById(R.id.waveTop);
+
+        ObjectAnimator bottomWaveAnim = ObjectAnimator.ofFloat(waveBottom, "translationX", -150f, 150f);
+        bottomWaveAnim.setDuration(4000);
+        bottomWaveAnim.setRepeatMode(ValueAnimator.REVERSE);
+        bottomWaveAnim.setRepeatCount(ValueAnimator.INFINITE);
+        bottomWaveAnim.setInterpolator(new AccelerateDecelerateInterpolator());
+        bottomWaveAnim.start();
+
+        ObjectAnimator topWaveAnim = ObjectAnimator.ofFloat(waveTop, "translationX", 150f, -150f);
+        topWaveAnim.setDuration(4000);
+        topWaveAnim.setRepeatMode(ValueAnimator.REVERSE);
+        topWaveAnim.setRepeatCount(ValueAnimator.INFINITE);
+        topWaveAnim.setInterpolator(new AccelerateDecelerateInterpolator());
+        topWaveAnim.start();
     }
 }
