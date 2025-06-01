@@ -1,85 +1,45 @@
 package br.udesc.ddm.condominioapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.ImageView;
 
-import br.udesc.ddm.condominioapp.ui.condominio.CondominioFormActivity;
-import br.udesc.ddm.condominioapp.ui.condominio.CondominioListActivity;
-import br.udesc.ddm.condominioapp.ui.locatario.LocatarioListActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import br.udesc.ddm.condominioapp.ui.condominio.CondominioFragment;
+import br.udesc.ddm.condominioapp.ui.locatario.LocatarioFragment;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Button btnCadastrarCondominio;
-    private Button btnListarCondominios;
-    private Button btnGerenciarLocatarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initComponents();
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigation);
 
-        setupListeners();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, new CondominioFragment())
+                    .commit();
+            bottomNav.setSelectedItemId(R.id.nav_condominios);
+        }
 
-        animateWaves();
-    }
-
-    private void initComponents() {
-        btnCadastrarCondominio = findViewById(R.id.btnCadastrarCondominio);
-        btnListarCondominios = findViewById(R.id.btnListarCondominios);
-        btnGerenciarLocatarios = findViewById(R.id.btnGerenciarLocatarios);
-    }
-
-    private void setupListeners() {
-        btnCadastrarCondominio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CondominioFormActivity.class);
-                startActivity(intent);
+        bottomNav.setOnItemSelectedListener(item -> {
+            Fragment frag;
+            if (item.getItemId() == R.id.nav_condominios) {
+                frag = new CondominioFragment();
+            } else if (item.getItemId() == R.id.nav_locatarios) {
+                frag = new LocatarioFragment();
+            } else {
+                return false;
             }
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, frag)
+                    .commit();
+            return true;
         });
-
-        btnListarCondominios.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CondominioListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnGerenciarLocatarios.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LocatarioListActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-    private void animateWaves() {
-        ImageView waveBottom = findViewById(R.id.waveBackground);
-        ImageView waveTop = findViewById(R.id.waveTop);
-
-        ObjectAnimator bottomWaveAnim = ObjectAnimator.ofFloat(waveBottom, "translationX", -150f, 150f);
-        bottomWaveAnim.setDuration(4000);
-        bottomWaveAnim.setRepeatMode(ValueAnimator.REVERSE);
-        bottomWaveAnim.setRepeatCount(ValueAnimator.INFINITE);
-        bottomWaveAnim.setInterpolator(new AccelerateDecelerateInterpolator());
-        bottomWaveAnim.start();
-
-        ObjectAnimator topWaveAnim = ObjectAnimator.ofFloat(waveTop, "translationX", 150f, -150f);
-        topWaveAnim.setDuration(4000);
-        topWaveAnim.setRepeatMode(ValueAnimator.REVERSE);
-        topWaveAnim.setRepeatCount(ValueAnimator.INFINITE);
-        topWaveAnim.setInterpolator(new AccelerateDecelerateInterpolator());
-        topWaveAnim.start();
     }
 }
