@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -70,7 +70,7 @@ public class CondominioAdapter extends RecyclerView.Adapter<CondominioAdapter.Co
         private final TextView tvValores;
         private final Button btnVerBlocos;
         private final Button btnEditar;
-        private final ImageView ivMenu;
+        private final ImageButton btnDelete;
 
         public CondominioViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,7 +79,7 @@ public class CondominioAdapter extends RecyclerView.Adapter<CondominioAdapter.Co
             tvValores = itemView.findViewById(R.id.tvValores);
             btnVerBlocos = itemView.findViewById(R.id.btnVerBlocos);
             btnEditar = itemView.findViewById(R.id.btnEditar);
-            ivMenu = itemView.findViewById(R.id.ivMenu);
+            btnDelete   = itemView.findViewById(R.id.btnDelete);
         }
 
         public void bind(final Condominio condominio) {
@@ -113,28 +113,12 @@ public class CondominioAdapter extends RecyclerView.Adapter<CondominioAdapter.Co
                 }
             });
 
-            ivMenu.setOnClickListener(v -> {
-                PopupMenu popup = new PopupMenu(context, ivMenu);
-                popup.inflate(R.menu.menu_condominio_item);
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        if (item.getItemId() == R.id.action_edit) {
-                            if (listener != null) {
-                                listener.onEditClick(condominio);
-                            }
-                            return true;
-                        } else if (item.getItemId() == R.id.action_delete) {
-                            if (listener != null) {
-                                listener.onDeleteClick(condominio);
-                            }
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-                popup.show();
+            btnDelete.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onDeleteClick(condominio);
+                }
             });
+
         }
     }
 }

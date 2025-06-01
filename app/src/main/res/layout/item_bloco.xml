@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="177dp"
         android:padding="16dp">
 
         <TextView
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/ivMenu"
+            app:layout_constraintEnd_toStartOf="@id/btnDelete"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Bloco A" />
@@ -35,22 +35,25 @@
             app:layout_constraintTop_toBottomOf="@+id/tvNome"
             tools:text="Andares: 10 | Vagas de Garagem: 15" />
 
-        <ImageView
-            android:id="@+id/ivMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:id="@+id/btnDelete"
+            android:layout_width="38dp"
+            android:layout_height="30dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Menu de opções"
+            android:contentDescription="@string/delete"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_more_vert" />
+            app:srcCompat="@drawable/iconmonstr_trash_can_1"
+            app:tint="#DC143C"
+            app:rippleColor="#B71C1C"/>
+
 
         <Button
             android:id="@+id/btnVerApartamentos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/button_small_background"
             android:text="Ver Apartamentos"
             android:textColor="@android:color/white"
@@ -62,8 +65,8 @@
             android:id="@+id/btnEditar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/button_edit_background"
             android:text="Editar"
             android:textColor="@android:color/white"
