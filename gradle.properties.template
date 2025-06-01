@@ -19,3 +19,7 @@ android.useAndroidX=true
 # resources declared in the library itself and none from the library's dependencies,
 # thereby reducing the size of the R class for that library
 android.nonTransitiveRClass=true
+
+# API Keys - SUBSTITUA pelas suas chaves reais
+# Para obter a chave do Google Maps: https://developers.google.com/maps/documentation/android-sdk/get-api-key
+GOOGLE_MAPS_API_KEY="COLE_SUA_CHAVE_API_DO_GOOGLE_MAPS_AQUI"

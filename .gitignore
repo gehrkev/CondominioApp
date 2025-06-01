@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+# Use o gradle.properties.template como template para seu gradle.properties local -- Jamais exponha sua API Key na internet!
+gradle.properties

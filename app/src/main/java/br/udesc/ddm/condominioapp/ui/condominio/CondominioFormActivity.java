@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.udesc.ddm.condominioapp.R;
+import br.udesc.ddm.condominioapp.data.api.CepResponse;
 import br.udesc.ddm.condominioapp.data.model.Condominio;
 import br.udesc.ddm.condominioapp.utils.CepUtils;
 import br.udesc.ddm.condominioapp.utils.NumberFormatter;
@@ -195,7 +196,7 @@ public class CondominioFormActivity extends AppCompatActivity {
         viewModel.consultarCep(cep);
     }
 
-    private void preencherEnderecoComCep(br.udesc.ddm.condominioapp.data.model.CepResponse cepResponse) {
+    private void preencherEnderecoComCep(CepResponse cepResponse) {
         if (cepResponse.getLogradouro() != null && !cepResponse.getLogradouro().trim().isEmpty()) {
             etLogradouro.setText(cepResponse.getLogradouro());
         }
@@ -231,9 +232,9 @@ public class CondominioFormActivity extends AppCompatActivity {
         etBairro.setText(condominio.getBairro());
         etLocalidade.setText(condominio.getLocalidade());
         etUf.setText(condominio.getUf());
-        etTaxaMensal.setText(String.valueOf(condominio.getTaxaMensalCondominio()));
-        etFatorMetragem.setText(String.valueOf(condominio.getFatorMultiplicadorDeMetragem()));
-        etValorGaragem.setText(String.valueOf(condominio.getValorVagaGaragem()));
+        etTaxaMensal.setText(formatarComDuasCasas(condominio.getTaxaMensalCondominio()));
+        etFatorMetragem.setText(formatarComDuasCasas(condominio.getFatorMultiplicadorDeMetragem()));
+        etValorGaragem.setText(formatarComDuasCasas(condominio.getValorVagaGaragem()));
     }
 
     private boolean validarCampos() {
@@ -241,7 +242,7 @@ public class CondominioFormActivity extends AppCompatActivity {
 
         String nome = etNome.getText().toString().trim();
         if (nome.isEmpty()) {
-            tilNome.setError("Nome é obrigatório");
+            tilNome.setError("Nome é obrigatório!");
             isValid = false;
         } else {
             tilNome.setError(null);
@@ -249,18 +250,34 @@ public class CondominioFormActivity extends AppCompatActivity {
 
         String cep = etCep.getText().toString().trim();
         if (!cep.isEmpty() && !CepUtils.isValidCep(cep)) {
-            tilCep.setError("CEP deve ter 8 dígitos");
+            tilCep.setError("CEP deve ter 8 dígitos!");
             isValid = false;
         } else {
             tilCep.setError(null);
         }
 
         String uf = etUf.getText().toString().trim();
-        if (!uf.isEmpty() && uf.length() != 2) {
-            tilUf.setError("UF deve ter 2 caracteres");
+        if ((!uf.isEmpty() && uf.length() != 2) || uf.isEmpty()) {
+            tilUf.setError("UF deve ter 2 caracteres!");
             isValid = false;
         } else {
             tilUf.setError(null);
+        }
+
+        String cidade = etLocalidade.getText().toString().trim();
+        if (cidade.isEmpty()){
+            tilLocalidade.setError("Cidade é obrigatória!");
+            isValid = false;
+        } else {
+            tilLocalidade.setError(null);
+        }
+
+        String logradouro = etLogradouro.getText().toString().trim();
+        if(logradouro.isEmpty()){
+            tilLogradouro.setError(("Logradouro é obrigatório!"));
+            isValid = false;
+        } else {
+            tilLogradouro.setError(null);
         }
 
         return isValid;
@@ -292,5 +309,9 @@ public class CondominioFormActivity extends AppCompatActivity {
         viewModel.salvarCondominio(condominioAtual);
 
         finish();
+    }
+
+    public static String formatarComDuasCasas(double valor) {
+        return String.format("%.2f", valor);
     }
 }

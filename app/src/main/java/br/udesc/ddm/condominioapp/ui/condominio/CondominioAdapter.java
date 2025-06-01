@@ -1,12 +1,13 @@
 package br.udesc.ddm.condominioapp.ui.condominio;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -28,7 +29,9 @@ public class CondominioAdapter extends RecyclerView.Adapter<CondominioAdapter.Co
 
     public interface CondominioListener {
         void onVerBlocosClick(Condominio condominio);
+
         void onEditClick(Condominio condominio);
+
         void onDeleteClick(Condominio condominio);
     }
 
@@ -71,6 +74,7 @@ public class CondominioAdapter extends RecyclerView.Adapter<CondominioAdapter.Co
         private final Button btnVerBlocos;
         private final Button btnEditar;
         private final ImageButton btnDelete;
+        private final ImageButton btnVerLocalizacao;
 
         public CondominioViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,7 +83,8 @@ public class CondominioAdapter extends RecyclerView.Adapter<CondominioAdapter.Co
             tvValores = itemView.findViewById(R.id.tvValores);
             btnVerBlocos = itemView.findViewById(R.id.btnVerBlocos);
             btnEditar = itemView.findViewById(R.id.btnEditar);
-            btnDelete   = itemView.findViewById(R.id.btnDelete);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
+            btnVerLocalizacao = itemView.findViewById(R.id.btnVerLocalizacao);
         }
 
         public void bind(final Condominio condominio) {
@@ -117,6 +122,13 @@ public class CondominioAdapter extends RecyclerView.Adapter<CondominioAdapter.Co
                 if (listener != null) {
                     listener.onDeleteClick(condominio);
                 }
+            });
+
+            btnVerLocalizacao.setOnClickListener(v -> {
+                Intent intent = new Intent(context, MapaCondominioActivity.class);
+                intent.putExtra("endereco", condominio.getEnderecoCompleto());
+                intent.putExtra("nome", condominio.getNome());
+                context.startActivity(intent);
             });
 
         }

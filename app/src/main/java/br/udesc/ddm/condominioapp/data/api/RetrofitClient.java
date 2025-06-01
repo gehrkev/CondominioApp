@@ -1,20 +1,22 @@
 package br.udesc.ddm.condominioapp.data.api;
 
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import okhttp3.Interceptor;
-import okhttp3.Request;
-import java.util.concurrent.TimeUnit;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
     private static final Map<String, Retrofit> retrofitInstances = new HashMap<>();
 
     private static CepApiService cepApiService = null;
+    private static GoogleMapsApiService googleMapsApiService = null;
 
     public static Retrofit getClient(String baseUrl) {
         if (!retrofitInstances.containsKey(baseUrl)) {
@@ -66,6 +68,13 @@ public class RetrofitClient {
         return cepApiService;
     }
 
+    public static GoogleMapsApiService getGoogleMapsApiService() {
+        if (googleMapsApiService == null) {
+            googleMapsApiService = getClient(ApiConfig.GOOGLE_MAPS_BASE_URL).create(GoogleMapsApiService.class);
+        }
+        return googleMapsApiService;
+    }
+
     public static <T> T createService(Class<T> serviceClass, String baseUrl) {
         return getClient(baseUrl).create(serviceClass);
     }
@@ -73,5 +82,6 @@ public class RetrofitClient {
     public static void clearCache() {
         retrofitInstances.clear();
         cepApiService = null;
+        googleMapsApiService = null;
     }
 }
