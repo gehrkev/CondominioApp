@@ -3,10 +3,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_condominios"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/icons_home"
         android:title="Condomínios" />
     <item
         android:id="@+id/nav_locatarios"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/icons_locatario"
         android:title="Locatários" />
 </menu>

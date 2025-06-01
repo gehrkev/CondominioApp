@@ -18,12 +18,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/primary"
-        app:menu="@menu/bottom_navigation_menu"
-        app:itemIconTint="@color/colorTextSecondary"
-        app:itemTextColor="@color/colorTextSecondary"
-        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/bottom_nav_item_tint_selector"
+        app:itemTextColor="@color/bottom_nav_item_tint_selector"
+        app:itemBackground="@color/primary"
+        app:itemActiveIndicatorStyle="@style/HideBottomNavIndicator"  app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/bottom_navigation_menu"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
