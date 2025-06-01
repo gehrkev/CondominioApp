@@ -2,12 +2,10 @@ package br.udesc.ddm.condominioapp.ui.bloco;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.PopupMenu;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -68,7 +66,8 @@ public class BlocoAdapter extends RecyclerView.Adapter<BlocoAdapter.BlocoViewHol
         private final TextView tvDetalhes;
         private final Button btnVerApartamentos;
         private final Button btnEditar;
-        private final ImageView ivMenu;
+        private final ImageButton btnDelete;
+
 
         public BlocoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,7 +75,7 @@ public class BlocoAdapter extends RecyclerView.Adapter<BlocoAdapter.BlocoViewHol
             tvDetalhes = itemView.findViewById(R.id.tvDetalhes);
             btnVerApartamentos = itemView.findViewById(R.id.btnVerApartamentos);
             btnEditar = itemView.findViewById(R.id.btnEditar);
-            ivMenu = itemView.findViewById(R.id.ivMenu);
+            btnDelete   = itemView.findViewById(R.id.btnDelete);
         }
 
         public void bind(final Bloco bloco) {
@@ -97,28 +96,10 @@ public class BlocoAdapter extends RecyclerView.Adapter<BlocoAdapter.BlocoViewHol
                     listener.onEditClick(bloco);
                 }
             });
-
-            ivMenu.setOnClickListener(v -> {
-                PopupMenu popup = new PopupMenu(context, ivMenu);
-                popup.inflate(R.menu.menu_bloco_item);
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        if (item.getItemId() == R.id.action_edit) {
-                            if (listener != null) {
-                                listener.onEditClick(bloco);
-                            }
-                            return true;
-                        } else if (item.getItemId() == R.id.action_delete) {
-                            if (listener != null) {
-                                listener.onDeleteClick(bloco);
-                            }
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-                popup.show();
+            btnDelete.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onDeleteClick(bloco);
+                }
             });
         }
     }

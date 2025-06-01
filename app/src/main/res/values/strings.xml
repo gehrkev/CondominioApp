@@ -2,4 +2,5 @@
     <string name="app_name">CondominioApp</string>
     <string name="title_activity_condominio_list">CondominioListActivity</string>
     <string name="app_logo">Logo do aplicativo</string>
+    <string name="delete">Excluir</string>
 </resources>
