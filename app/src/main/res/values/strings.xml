@@ -2,4 +2,6 @@
     <string name="app_name">CondominioApp</string>
     <string name="title_activity_condominio_list">CondominioListActivity</string>
     <string name="app_logo">Logo do aplicativo</string>
+    <string name="about_description">O MyMoradia é uma solução inteligente e prática para a gestão de condomínios, criada para facilitar a organização e o controle de residenciais, blocos e locatários de forma intuitiva. Desenvolvido pensando na modernização da administração condominial, o aplicativo oferece ferramentas essenciais para registrar, visualizar e gerenciar todos os dados do seu condomínio com poucos toques.</string>
+    <string name="about_credits">Desenvolvido por André Ludwig, Gabriel Küter e Vitor Gehrke.\n\nSuporte: suporte.mymoradia@gmail.com</string>
 </resources>
