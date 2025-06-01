@@ -51,6 +51,9 @@
             android:exported="false"
             android:theme="@style/Theme.CondominioApp" />
         <activity
+            android:name=".ui.about.AboutActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -59,7 +62,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

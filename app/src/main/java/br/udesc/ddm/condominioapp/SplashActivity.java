@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity{
-    private static final long SPLASH_DELAY = 2500; // Duracao de 3 segundos na tela de splash
+    private static final long SPLASH_DELAY = 5000; // Duracao de 3 segundos na tela de splash
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

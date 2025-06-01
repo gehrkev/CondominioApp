@@ -9,4 +9,8 @@
         android:id="@+id/nav_locatarios"
         android:icon="@drawable/icons_locatario"
         android:title="Locatários" />
+
+    <item
+        android:id="@+id/nav_about"
+        android:icon="@drawable/icons_about" android:title="Sobre" />
 </menu>

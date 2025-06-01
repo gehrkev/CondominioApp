@@ -1,14 +1,12 @@
 package br.udesc.ddm.condominioapp;
 
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import br.udesc.ddm.condominioapp.ui.condominio.CondominioFragment;
 import br.udesc.ddm.condominioapp.ui.locatario.LocatarioFragment;
+import br.udesc.ddm.condominioapp.ui.about.AboutFragment; // Importe o novo AboutFragment
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,19 +25,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         bottomNav.setOnItemSelectedListener(item -> {
-            Fragment frag;
-            if (item.getItemId() == R.id.nav_condominios) {
-                frag = new CondominioFragment();
-            } else if (item.getItemId() == R.id.nav_locatarios) {
-                frag = new LocatarioFragment();
-            } else {
-                return false;
+            Fragment selectedFragment = null;
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.nav_condominios) {
+                selectedFragment = new CondominioFragment();
+            } else if (itemId == R.id.nav_locatarios) {
+                selectedFragment = new LocatarioFragment();
+            } else if (itemId == R.id.nav_about) {
+                selectedFragment = new AboutFragment();
             }
 
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, frag)
-                    .commit();
-            return true;
+            if (selectedFragment != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainer, selectedFragment)
+                        .commit();
+                return true;
+            }
+            return false;
         });
     }
 }
